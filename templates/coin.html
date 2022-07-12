@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Setup</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Andika&family=KoHo:wght@400&family=Tomorrow&display=swap');
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/general.css">
+    <style>
+
+    
+    .input-field {
+    width: 66%;
+    border-radius: 5px;
+    }
+    
+
+    .radio-toolbar {
+    position: relative;
+    float: right;
+}
+
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    background-color: #46466f;
+    padding: 4px 9px;
+    color: #fff;
+    font-family: 'Andika', sans-serif;
+    font-size: 10px;
+    border-radius: 10px;
+}
+
+.radio-toolbar label:hover {
+  background-color: #667072;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+    background: #667072;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background: #667072;
+}
+
+    
+
+.slidein-from-right {
+    -webkit-animation: slidein-from-right2 400ms;
+}
+@-webkit-keyframes slidein-from-right2 {
+    from {
+        opacity: 0;
+        -webkit-transform:translateX(100%);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform:translateX(0%);
+    }
+}
+
+    .slide-away {
+    -webkit-animation: slide 400ms;
+}
+@-webkit-keyframes slide {
+    from {
+        -webkit-transform:translateX(0%);
+    }
+    to {
+        -webkit-transform:translateX(200%);
+    }
+}
+    
+    </style>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body id="body" style="background-color: #4d4b81; overflow: hidden; width: 100%; height: 100%;">
+
+    <div class="center slidein-from-right" id="center" style="padding-top: 46px;">
+        <h3><a style="text-decoration: none; color: #fff; cursor: pointer;" onclick="closeCoinScreen()">⬅️ Return To Portfolio</a></h3>
+        <h1><img style="position: relative; top: 5px;" src="/icons/etc.png"></img>&ensp;Ethereum Classic (ETC)</h1>
+        
+        <p style="font-family: Tomorrow; font-size: 34px; margin: 0;" >£526.30 <span style="font-size: 16px; color: #2ad728; ">+6.83%</span></p>
+        <p style="font-family: Tomorrow; font-size: 14px; margin: 0;" >1 ETC = £26.42&emsp;102.52 ETC</p>
+        
+    
+<div class="radio-toolbar" style="right: 50px; top:15px;">
+    <input type="radio" id="radioApple" name="radioFruit" value="apple" checked>
+    <label for="radioApple">1H</label>
+
+    <input type="radio" id="radioBanana" name="radioFruit" value="banana">
+    <label for="radioBanana">1D</label>
+
+    <input type="radio" id="radioOrange" name="radioFruit" value="orange">
+    <label for="radioOrange">1M</label> 
+    
+    <input type="radio" id="radioOrange2" name="radioFruit" value="orange2">
+    <label for="radioOrange2">1Y</label> 
+    
+    <input type="radio" id="radioOrange3" name="radioFruit" value="orange3">
+    <label for="radioOrange3">ALL</label> 
+    
+</div>
+<p>&nbsp;</p>
+    
+        
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        
+        
+        
+    </div>
+    
+<script>
+
+function ConvertDate(date) {
+    return date.toLocaleDateString('en-GB', {
+    day : 'numeric',
+    month : 'short',
+    year : 'numeric'
+});
+    
+}
+
+
+var xValues = ["",ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951))];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{ 
+      data: Array(110).fill().map(() => Math.round(Math.random() * 50)),
+    fill: true,
+    borderColor: 'green',
+    backgroundColor: 'rgba(0,255,0,0.15)'
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+        yAxes: [{
+            ticks: {
+                fontColor: "white",
+                fontSize: 14,
+                stepSize: 1,
+                maxTicksLimit: 20,
+            }
+        }],
+        xAxes: [{
+            ticks: {
+                fontColor: "white",
+                fontSize: 14,
+                stepSize: 1,
+                maxTicksLimit: 5,                    
+                maxRotation: 0,
+                minRotation: 0
+            }
+        }]
+    }
+  }
+});
+
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function closeCoinScreen() {
+    clearScreen();
+    sleep(400).then(() => {
+        window.location.href = '/';
+    });
+}
+
+function clearScreen() {
+    document.getElementById("center").classList.add("slide-away");
+    document.getElementById("center").style.right = "5000px";
+    sleep(400).then(() => {
+        document.getElementById("center").style.display = "none";
+    });
+}
+
+
+</script>
+</body>
+</html>

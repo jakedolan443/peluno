@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Setup</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Andika&family=KoHo:wght@400&family=Tomorrow&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/general.css">
+    <style>
+
+    
+    .input-field {
+    width: 66%;
+    border-radius: 5px;
+    }
+    
+    .btn {
+    width: 125px;
+    color: #fff;
+    background: green;
+    }
+    
+    .portfolio_box {
+    overflow: hidden;
+    cursor: pointer;
+    background: #46466f;
+    border-radius: 25px;
+    padding: 6px 10px;
+    width: 718px;
+    height: 72px;
+    }
+    
+    .portfolio_box:hover {
+    background: #4b4b77;
+    }
+    
+    .box_wrapper {
+    position: absolute;
+    padding-bottom: 4px;
+    }
+
+.appear {
+    -webkit-animation: to_appear 600ms;
+    transform-style: preserve-3d;
+}
+.disappear {
+    -webkit-animation: to_disappear 600ms;
+    transform-style: preserve-3d;
+}
+@-webkit-keyframes to_appear {
+    from {
+        opacity: 0;
+        -webkit-transform:translate(100%, 0%);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform:translate(0%, 0%);
+    }
+}
+@-webkit-keyframes to_disappear {
+    from {
+        -webkit-transform:translate(0%, 0%);
+    }
+    to {
+        -webkit-transform:translate(-200%, 0%);
+    }
+}
+
+
+
+.menubtn {
+    background: #46466f;
+    border-radius: 9px;
+    width: 200px;
+    font-family: Tomorrow, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.menubtn:hover {
+background: #4b4b77;
+}
+
+.api_option {
+    border-bottom: 3px solid #4b4b77;
+    display: inline;
+    padding: 25px;
+    padding-right: 50px;
+}
+
+.api_btn {
+    background: #363656;
+    color: #fff;
+    width: 165px;
+    font-family: Tomorrow, sans-serif;
+    font-size: 20px;
+    border-radius: 9px;
+    border: 1px solid #363656;
+    text-align: center;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.api_btn:hover {
+background: #4b4b77;
+}
+
+
+.api_input {
+    background: #363656;
+    color: #fff;
+    width: 80%;
+    font-family: Tomorrow, sans-serif;
+    font-size: 20px;
+    border-radius: 9px;
+    border: 1px solid #363656;
+    text-align: left;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.api_input:hover {
+background: #4b4b77;
+}
+
+.api_active {
+    background: #5f5f96;
+    border: 1px solid #5f5f96;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-family: KoHo, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+svg {
+	stroke-dasharray: 269.7405090332031px;
+	stroke-dashoffset: 0;
+	animation: heartBeat 10s linear reverse infinite;
+	transform: rotate(-90deg);
+}
+
+@keyframes heartBeat {
+	50% {
+		stroke-dashoffset: 269.7405090332031px;
+	}
+	50.01% {
+		stroke-dashoffset: -269.7405090332031px;
+	}
+}
+    
+    </style>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body id="body" style="background-color: #4d4b81; overflow: hidden; width: 100; height: 100%;">
+
+    <div class="center" id="center">
+    
+        <div class="appear" id="page1" style="display: block;">
+    
+            <h1>Hello!</h1>
+            <div>
+                <h4>Thank you for downloading CryptoHTTP! To get started, you will be asked a few questions on how you would like to use this application.</h4>
+            </div>
+            <div style="padding-top: 25px;">
+                <a onclick="Page(2)"><p class="menubtn" style="padding: 10px 6px;">Start</p></a>
+            </div>
+
+        </div>
+        
+        <div class="appear" id="page2" style="display: none;">
+    
+            <h1>Server Authentication</h1>
+            <div>
+                <h4>In order to configure the server in the future, you will be asked to provide an authentication key. This key should NOT be shared. You will not see this key again, so it would be wise to note it down now.</h4>
+                <br>
+                <h4>Key: <span style="font-size: 18px; font-family: monospace;">5923650236523i692351250129692362351267</span></h4>
+                <br>
+                <input type="checkbox" autocomplete="off" id="noted_check" name="noted" onclick="return: false;">
+                <h4 style="display: inline; font-size: 15px; font-family: Tomorrow; font-weight: 200;"><label for="noted"> I have copied this key to a secure location.</label></h4>
+            </div>
+            <div style="padding-top: 25px;">
+                <a id="noted_btn_a"><p id="noted_btn" class="menubtn" style="color: #7c8180; padding: 10px 6px;">Next</p></a>
+            </div>
+
+        </div>
+        
+        <div class="appear" id="page3" style="display: none;">
+    
+            <h1>API Preference</h1>
+            <div>
+                <h4>An external API is used to fetch live market data on the markets of your choosing. You may choose which API to use.</h4>
+                <br>
+                <h4 style="padding-bottom: 15px;">You are strongly recommended to provide an API key, as this will increase your rate limit.</h4>
+                <br>
+                <div>
+                    <div>
+                        <button class="w3-bar-item w3-button tablink api_active api_btn" onclick="openCity(event,'api_option_1')" style="width: 200px;">alphavantage.co</button>
+                        <button class="w3-bar-item w3-button tablink api_btn" onclick="openCity(event,'api_option_2')">polygon.io</button>
+                        <button class="w3-bar-item w3-button tablink api_btn"  onclick="openCity(event,'api_option_3')">cryptowat.ch</button>
+                    </div>
+                </div>
+                
+                
+                <div style="width: 100%; background: #46466f; height: 400px; border-radius: 9px; padding: 11px; ">
+                
+                    <div class="api_tab" id="api_option_1">
+                        <h5>An API key is optional to use Alpha Vantage's free API, but providing one will increase your rate limit.</h5>
+                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://www.alphavantage.co/support/#api-key">here</a></u>.</h5>
+                        <br>
+                        <h5>API Key:
+                        <input class="api_input"></input>
+                        </h5>
+                    </div>
+
+                    <div class="api_tab" id="api_option_2" style="display:none">
+                        <h5>An API key is <u>required</u> to use Polygon's API.</h5>
+                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://polygon.io/dashboard/signup">here</a></u>.</h5>
+                        <br>
+                        <h5>API Key:
+                        <input class="api_input"></input>
+                        </h5>
+                    </div>
+
+                    <div class="api_tab" id="api_option_3" style="display:none">
+                        <h5>An API key is optional to use CryptoWatch's free API, but providing one will increase your rate limit.</h5>
+                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://www.alphavantage.co/support/#api-key">here</a></u>.</h5>
+                        <br>
+                        <h5>API Key:
+                        <input class="api_input"></input>
+                        </h5>
+                    </div>
+                
+                </div>
+
+            </div>
+            <div style="padding-top: 25px;">
+                <a onclick="Page(4)"><p class="menubtn" style="padding: 10px 6px;">Next</p></a>
+            </div>
+
+        </div>
+        
+        <div class="appear" id="page4" style="display: none;">
+    
+            <h1>Currency</h1>
+            <div>
+                <h4>Choose the native display currency you wish to use.</h4>
+                <br>
+                <div style="width: 100%; background: #46466f; height: 180px; border-radius: 9px;">
+                    <div style="height: 75px; padding: 10px;">
+                        <label class="container">USD ($)
+                        <input id="currency_radio_usd" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">EUR (€)
+                        <input id="currency_radio_eur" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">GBP (£)
+                        <input id="currency_radio_gbp" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">CAD (C$)
+                        <input id="currency_radio_cad" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">AUD (A$)
+                        <input id="currency_radio_aud" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div style="padding-top: 25px;">
+                <a id="currency_btn_a"><p id="currency_btn" class="menubtn" style="color: #7c8180; padding: 10px 6px;">Next</p></a>
+            </div>
+
+        </div>
+        
+        <div class="appear" id="page5" style="display: none;">
+    
+            <h1>Markets</h1>
+            <div>
+                <h4>Select the markets you wish to monitor. Markets can be added/removed at any time beyond this setup.</h4>
+                <br>
+                <div style="width: 100%; background: #46466f; height: 320px; border-radius: 9px;">
+                    <div style="height: 320px; padding: 10px; overflow-y: scroll;">
+                        {% for entry in data['coins'] %}
+                            <label class="container">{{ entry['name'] }}
+                            <input autocomplete="off" id="coin_{{ entry['name'] }}" type="checkbox">
+                            <span class="checkmark"></span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div style="padding-top: 25px;">
+                <a onclick="Finish();"><p class="menubtn" style="padding: 10px 6px;">Finish</p></a>
+            </div>
+
+        </div>
+        
+        <div class="appear" id="page6" style="display: none; cursor: progress;">
+    
+            <h1 id="progress_text">Setting up your server. Please wait .</h1>
+            <div style="padding-top: 60px;">
+            </div>
+
+
+        </div>
+        
+        
+    </div>
+<script>
+
+currency = ["usd", "eur", "gbp", "cad", "aud"];
+coin_list = [{"name": "Bitcoin", "symbol": "BTC"}, {"name": "Ethereum", "symbol": "ETC"}, {"name": "Tether", "symbol": "USDT"}, {"name": "USD Coin", "symbol": "USDC"}, {"name": "BNB", "symbol": "BNB"}, {"name": "Binance USD", "symbol": "BUSD"}, {"name": "Cardano", "symbol": "ADA"}, {"name": "XRP", "symbol": "XRP"}, {"name": "Solana", "symbol": "SOL"}, {"name": "Dogecoin", "symbol": "DOGE"}, {"name": "Polkadot", "symbol": "DOT"}, {"name": "Dai", "symbol": "DAI"}, {"name": "TRON", "symbol": "TRX"}, {"name": "SHIBA INU", "symbol": "SHIB"}, {"name": "Wrapped Bitcoin", "symbol": "WBTC"}, {"name": "UNUS SED LEO", "symbol": "LEO"}, {"name": "Avalanche", "symbol": "AVAX"}, {"name": "Litecoin", "symbol": "LTC"}, {"name": "FTX Token", "symbol": "FTT"}, {"name": "Polygon", "symbol": "MATIC"}, {"name": "Chainlink", "symbol": "LINK"}, {"name": "Uniswap", "symbol": "UNI"}, {"name": "Crypto.com Coin", "symbol": "CRO"}, {"name": "Stellar Lumens", "symbol": "XLM"}, {"name": "NEAR Protocol", "symbol": "NEAR"}];
+api = ["alphavantage", "polygon.io", "cryptowatch"];
+chosenAPI = "api_option_1";
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("api_tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" api_active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " api_active";
+  chosenAPI = cityName;
+}
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i += 1) {
+                var reg = new RegExp('\\{' + i + '\\}', 'gm');
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        };  
+        
+function Page(n) {
+    for (let i = 1; i < 6; i++) {
+        document.getElementById(String.format("page{0}", i)).classList.remove("appear");
+        document.getElementById(String.format("page{0}", i)).classList.add("disappear");
+        document.getElementById(String.format("page{0}", i)).style.right = "5000px;"
+    }
+    sleep(600).then(() => {
+        for (let i = 1; i < 6; i++) {
+            document.getElementById(String.format("page{0}", i)).style.display = "none";
+        }
+        document.getElementById(String.format("page{0}", n)).classList.add("appear");
+        document.getElementById(String.format("page{0}", n)).style.display = "block";
+        for (let i = 1; i < 6; i++) {
+            document.getElementById(String.format("page{0}", i)).classList.remove("disappear");
+        }
+    });
+
+}
+
+function getChosenAPI() {
+    return chosenAPI;
+}
+
+function getChosenCurrency() {
+    return chosenCurrency;
+}
+
+function getChosenMarkets() {
+    coins = [];
+    for (let i = 0; i < coin_list.length; i++) {
+        if (document.getElementById(String.format("coin_{0}", coin_list[i].name)).checked) {
+            coins[coins.length] = coin_list[i].name;
+        }
+    }
+    return coins;
+}
+
+function Finish() {
+    Page(6);
+    const config = {};
+    config.apiPref = getChosenAPI();
+    config.currencyPref = getChosenCurrency();
+    config.monitorMarkets = getChosenMarkets();
+    ConfigureServer(config);
+    sleep(2600).then(() => {
+        window.location.replace("/");
+    });
+}
+
+function ConfigureServer(config) {
+    var url = "/setup";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(config));
+}
+
+document.getElementById("noted_check").addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    document.getElementById("noted_btn_a").onclick = function () {
+         Page(3);
+    }
+    document.getElementById("noted_btn").style.color = "#fff";
+  } else {
+    document.getElementById("noted_btn_a").onclick = "";
+    document.getElementById("noted_btn").style.color = "#7c8180";
+  }
+})
+
+for (let i = 1; i < currency.length; i++) {
+    document.getElementById(String.format('currency_radio_{0}', currency[i])).addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        document.getElementById("currency_btn_a").onclick = function () {
+            Page(5);
+        }
+        chosenCurrency = currency[i];
+        document.getElementById("currency_btn").style.color = "#fff";
+    } else {
+        document.getElementById("currency_btn_a").onclick = "";
+        document.getElementById("currency_btn").style.color = "#7c8180";
+    }
+    })
+}
+
+
+
+
+
+function ProgressLoop() {
+    elmnt = document.getElementById("progress_text");
+    if (elmnt.textContent == "Setting up your server. Please wait .") {
+        elmnt.textContent = "Setting up your server. Please wait ..";
+    } else if (elmnt.textContent == "Setting up your server. Please wait ..") {
+        elmnt.textContent = "Setting up your server. Please wait ...";
+    } else {
+        elmnt.textContent = "Setting up your server. Please wait .";
+    }
+    sleep(1200).then(() => {
+        ProgressLoop();
+    });
+}
+
+
+
+ProgressLoop();
+
+
+
+
+</script>
+</body>
+</html>

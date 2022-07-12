@@ -1,0 +1,1 @@
+{"api":"kraken", "api_key":"5623692938623125126", "watchlist":[], "active_api_refresh":60, "background_api_refresh":3600, "refresh_except_hours_since_midnight":[["0", "7"], ["14", "23"]], "host":"0.0.0.0", "port":8080, "appearance":"normal"}

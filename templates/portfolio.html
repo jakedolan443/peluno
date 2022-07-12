@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Setup</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Andika&family=KoHo:wght@400&family=Tomorrow&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/general.css">
+    <style>
+
+    
+    .input-field {
+    width: 66%;
+    border-radius: 5px;
+    }
+    
+    .btn {
+    width: 125px;
+    color: #fff;
+    background: green;
+    }
+    
+    .portfolio_box {
+    overflow: hidden;
+    cursor: pointer;
+    background: #46466f;
+    border-radius: 25px;
+    padding: 6px 10px;
+    width: 718px;
+    height: 72px;
+    }
+    
+    .portfolio_box:hover {
+    background: #4b4b77;
+    }
+    
+    .box_wrapper {
+    position: absolute;
+    padding-bottom: 4px;
+    }
+
+.slidein-from-right {
+    -webkit-animation: slidein-from-right2 400ms;
+    transform-style: preserve-3d;
+}
+.slidein-fix {
+    -webkit-animation: slidein-from-right2 1ms;
+    transform-style: preserve-3d;
+}
+@-webkit-keyframes slidein-from-right2 {
+    from {
+        opacity: 0;
+        -webkit-transform:translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform:translateX(0%);
+    }
+}
+
+    .slide-away {
+    -webkit-animation: slide 400ms;
+    transform-style: preserve-3d;
+}
+@-webkit-keyframes slide {
+    from {
+        -webkit-transform:translateX(0%);
+    }
+    to {
+        -webkit-transform:translateX(-200%);
+    }
+}
+
+.menubtn {
+    background: #46466f;
+    border-radius: 9px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.menubtn:hover {
+background: #4b4b77;
+}
+
+    
+    </style>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body id="body" style="background-color: #4d4b81; overflow: hidden; width: 100; height: 100%;">
+
+    <div class="center" id="center">
+        <h1>Your Portfolio</h1>
+        <a href="/settings"><img src="/icons/settings.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 6px; position: relative;"></img></a>
+        <a href="/add_new"><img src="/icons/add_new.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 12px; position: relative;"></img></a>
+        <a onclick="toggleMoveMode()"><img id="move_icon" src="/icons/move.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 18px; position: relative;"></img></a>
+        <p id="bar_name" style="padding-left: 12px; font-family: Tomorrow; font-size: 27px; margin: 0; padding-bottom: 8px; padding-top: 38px;" >Total: £526.30 <span style="font-size: 16px; color: #2ad728; ">+6.83%</span></p>
+        <div>
+            <div class="box_wrapper" id="box1" style="top: 192px">
+                <a onclick="openCoinScreen('etc')">
+                <div class="portfolio_box">
+                    <img style="position: absolute; width: auto; height: 32px;" src="/icons/btc.png"/><h3 style="position: relative; left: 40px;">Bitcoin (BTC)</h3>
+                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">0.5100 BTC</span>&ensp;➤&ensp;<span style="color: #ea656d;">£14,004.25 -£25.62</span></h4>
+                </div>
+                </a>
+            </div>
+        
+            <div class="box_wrapper" id="box2" style="top: 268px">
+                <a onclick="openCoinScreen('etc')">
+                <div class="portfolio_box">
+                    <img style="position: absolute;  width: auto; height: 32px;" src="/icons/xmr.png"/><h3 style="position: relative; left: 40px;">Monero (XMR)</h3>
+                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">15.630 XMR</span>&ensp;➤&ensp;<span style="color: #2ad728;">£1,521.77 +£2.56</span></h4>
+                </div>
+                </a>
+            </div>
+            
+            <div class="box_wrapper" id="box3" style="top: 344px">
+                <a onclick="openCoinScreen('etc')">
+                <div class="portfolio_box">
+                    <img style="position: absolute;  width: auto; height: 32px;" src="/icons/doge.png"/><h3 style="position: relative; left: 40px;">Dogecoin (DOGE)</h3>
+                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">96.23 DOGE</span>&ensp;➤&ensp;<span style="color: #2ad728;">£14.75 +£1.52</span></h4>
+                </div>
+                </a>
+            </div>
+        </div>
+        
+
+
+        
+        
+        
+        
+        
+    </div>
+    
+<script>
+
+
+
+
+dragElement(document.getElementById("box1"));
+dragElement(document.getElementById("box2"));
+dragElement(document.getElementById("box3"));
+const boxes = ["box1", "box2", "box3"]
+var n = parseInt(document.getElementById("box1").style.top, 10);
+var dragMode = false
+
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+
+function toggleMoveMode() {
+    if (dragMode) {
+      dragMode = false
+      document.getElementById("move_icon").src = "/icons/move.png"
+        document.querySelectorAll('*').forEach(function(node) {
+            node.style.cursor = 'default';
+        });
+
+    } else {
+      dragMode = true
+      document.getElementById("move_icon").src = "/icons/cancel.png"
+        document.querySelectorAll('*').forEach(function(node) {
+            node.style.cursor = 'grab';
+        });
+    }
+
+}
+
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id)) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id).onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    if (dragMode) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        pos5 = elmnt.style.top
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+  }
+
+String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i += 1) {
+                var reg = new RegExp('\\{' + i + '\\}', 'gm');
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        };  
+
+function round76(y)
+{
+    return ((Math.round((y-n)/76)*76)+n);
+}
+  
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2)  + "px";
+  }
+
+  
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+    
+    var new_coordY = (round76(elmnt.offsetTop - pos2)) 
+    var elmnt2 = "n/a"
+    elmnt.style.top = new_coordY  + "px";
+    for (let i = 1; i < boxes.length+1; i++) {
+        if (new_coordY == parseInt(document.getElementById(String.format("box{0}", i)).style.top, 10)) {
+            if (!(document.getElementById(String.format("box{0}", i)) == elmnt)) {
+                elmnt2 = document.getElementById(String.format("box{0}", i));
+            }
+    }
+    
+    
+    } 
+    if (!(elmnt2 == "n/a")) {
+        elmnt2.style.transition = "all 0.2s ease-out"
+        elmnt2.style.top = pos5
+        sleep(200).then(() => {
+            elmnt2.style.transition = ""
+        });
+    } else {
+        elmnt.style.transition = "all 0.2s ease-out"
+        elmnt.style.top = pos5
+        sleep(200).then(() => {
+            elmnt.style.transition = ""
+        });
+    }
+    
+  }
+}
+
+function openCoinScreen(coin) {
+    if (dragMode) {
+        return;
+    }
+    clearScreen();
+    sleep(400).then(() => {
+        window.location.href = String.format('/coin/{0}', coin);
+    });
+}
+
+function clearScreen() {
+
+    document.getElementById("center").classList.add("slide-away");
+    document.getElementById("center").style.right = "-5000px";
+    sleep(400).then(() => {
+        document.getElementById("center").style.display = "none";
+    });
+}
+
+
+
+if (String(document.referrer).includes("/coin/")) {
+document.getElementById("center").classList.add("slidein-from-right");    
+    sleep(400).then(() => {
+        window.location.href = "/#"
+    });
+} else {
+    document.getElementById("center").classList.add("slidein-fix");
+}
+
+
+
+</script>
+</body>
+</html>
