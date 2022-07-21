@@ -1,3 +1,4 @@
+#!/bin/python3
 import json
 from flask import Flask, render_template, request, redirect
 import server
