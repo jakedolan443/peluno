@@ -146,7 +146,7 @@ def Index_GET():
             portfolio[i]["command_word"] = "Owned"
         else:
             portfolio[i]["command_word"] = "Value"
-            portfolio[i]["amount"] = "{:<07}".format(1)
+            portfolio[i]["amount"] = "{:<07}".format(1.0)[:7]
         portfolio[i]["amount"] = "{:<07}".format(float(portfolio[i]['amount'][:7]))
         coin_info = server.get_data_for_coin(portfolio[i]['coin'])
         try:
