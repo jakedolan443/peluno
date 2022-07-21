@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path='')
 
 def update_coin_loop():
     while True:
-        if readHardStoreVariable("setup_completed"):
+        if not readHardStoreVariable("setup_completed") == "false":
             try:
                 for coin in readPortfolio():
                     server.fetch_coin_price("{}".format(readHardStoreVariable("crypto_api_key")), coin['coin'], "{}".format(readHardStoreVariable("currency")))
@@ -24,7 +24,7 @@ def update_exchange_rate():
     if (readHardStoreVariable("currency") == "USD"):
         return
     while True:
-        if readHardStoreVariable("setup_completed"):
+        if not readHardStoreVariable("setup_completed") == "false":
             try:
                 currency_url = 'https://v6.exchangerate-api.com/v6/{}/latest/USD'.format(readHardStoreVariable("currency_api_key"))
                 response = requests.get(currency_url).json()
@@ -132,8 +132,8 @@ def Setup_POST():
 
 @app.route('/')
 def Index_GET():
-    if not readHardStoreVariable("setup_completed"):
-        return redirect("/setup")
+    if readHardStoreVariable("setup_completed") == "false":
+        return redirect("/setup", code=302)
     portfolio = readPortfolio()
     prices = []
     changes = []
