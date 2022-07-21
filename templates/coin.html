@@ -84,14 +84,14 @@
 <body id="body" style="background-color: #4d4b81; overflow: hidden; width: 100%; height: 100%;">
 
     <div class="center slidein-from-right" id="center" style="padding-top: 46px;">
-        <h3><a style="text-decoration: none; color: #fff; cursor: pointer;" onclick="closeCoinScreen()">⬅️ Return To Portfolio</a></h3>
-        <h1><img style="position: relative; top: 5px;" src="/icons/etc.png"></img>&ensp;Ethereum Classic (ETC)</h1>
+        <h3><a style="text-decoration: none; color: #fff; cursor: pointer;" onclick="closeCoinScreen()">← Return To Portfolio</a></h3>
+        <h1><img style="position: relative; top: 5px;" src="/icons/{{ data['coin'] }}.png"></img>&ensp;{{ data['coin_full_name'] }}</h1>
         
-        <p style="font-family: Tomorrow; font-size: 34px; margin: 0;" >£526.30 <span style="font-size: 16px; color: #2ad728; ">+6.83%</span></p>
-        <p style="font-family: Tomorrow; font-size: 14px; margin: 0;" >1 ETC = £26.42&emsp;102.52 ETC</p>
+        <p style="text-transform: uppercase; font-family: Tomorrow; font-size: 34px; margin: 0;" >{{ data['currency_symbol'] }}{{ data['price'] }} <span style="font-size: 16px; color: #2ad728; ">{{ data['change'] }}</span></p>
+        <p id="portfolio_price_info" style="text-transform: uppercase; font-family: Tomorrow; font-size: 14px; margin: 0;" >1 {{ data['coin'] }} = {{ data['currency_symbol'] }}{{ data['single_price'] }}&emsp;{{ data['amount'] }} {{ data['coin'] }}</p>
         
     
-<div class="radio-toolbar" style="right: 50px; top:15px;">
+<div class="radio-toolbar" style="display: none; right: 50px; top:15px;">
     <input type="radio" id="radioApple" name="radioFruit" value="apple" checked>
     <label for="radioApple">1H</label>
 
@@ -111,7 +111,11 @@
 <p>&nbsp;</p>
     
         
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <canvas id="myChart" style="width:100%;max-width:700px; padding-bottom: 50px;"></canvas>
+        
+        
+        
+        <p id="data_warning" style="background-color: #b4b90d; border-radius: 5px; font-size: 14px; padding: 4px; opacity: .8">(!) More data needs to be fetched to form this graph properly. This may take a few hours.</p>
         
         
         
@@ -119,24 +123,69 @@
     
 <script>
 
-function ConvertDate(date) {
-    return date.toLocaleDateString('en-GB', {
-    day : 'numeric',
-    month : 'short',
-    year : 'numeric'
-});
-    
+var historic_data = {{ data['historic'][0] }}
+if (historic_data.length > 25) {
+    document.getElementById("data_warning").style.display = "none";
 }
 
 
-var xValues = ["",ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)), ConvertDate(new Date(1652570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951*1000)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951)),ConvertDate(new Date(1655570951))];
+function ConvertDate(date)  {
+  if (typeof date !== 'object') {
+    date = new Date(date);
+  }
+
+  var seconds = Math.floor((new Date() - date) / 1000);
+  var intervalType;
+
+  var interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) {
+    intervalType = 'year';
+  } else {
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) {
+      intervalType = 'month';
+    } else {
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) {
+        intervalType = 'day';
+      } else {
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+          intervalType = "hour";
+        } else {
+          interval = Math.floor(seconds / 60);
+          if (interval >= 1) {
+            intervalType = "minute";
+          } else {
+            interval = seconds;
+            intervalType = "second";
+          }
+        }
+      }
+    }
+  }
+
+  if (interval > 1 || interval === 0) {
+    intervalType += 's';
+  }
+  intervalType += ' ago';
+
+  return interval + ' ' + intervalType;
+};
+
+var xValues = [
+{% for date in data['historic'][0] %}
+ConvertDate(new Date({{ date }})),
+{% endfor %}
+];
+
 
 new Chart("myChart", {
   type: "line",
   data: {
     labels: xValues,
     datasets: [{ 
-      data: Array(110).fill().map(() => Math.round(Math.random() * 50)),
+      data: {{ data['historic'][1] }},
     fill: true,
     borderColor: 'green',
     backgroundColor: 'rgba(0,255,0,0.15)'
@@ -150,7 +199,10 @@ new Chart("myChart", {
                 fontColor: "white",
                 fontSize: 14,
                 stepSize: 1,
-                maxTicksLimit: 20,
+                maxTicksLimit: 5,
+                callback: function(value, index, values) {
+                    return value.toLocaleString("en-US",{style:"currency", currency:"{{ data['currency'] }}"});
+                }
             }
         }],
         xAxes: [{
@@ -185,6 +237,11 @@ function clearScreen() {
     sleep(400).then(() => {
         document.getElementById("center").style.display = "none";
     });
+}
+
+
+if ("{{ data['mode'] }}" == "coin") {
+    document.getElementById("portfolio_price_info").style.display = "none";
 }
 
 

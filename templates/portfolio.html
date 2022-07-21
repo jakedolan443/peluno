@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/general.css">
     <style>
-
+    
     
     .input-field {
     width: 66%;
@@ -74,6 +74,8 @@
 
 .menubtn {
     background: #46466f;
+    width: 150px;
+    float: right;
     border-radius: 9px;
     cursor: pointer;
     padding: 4px;
@@ -83,73 +85,215 @@
 background: #4b4b77;
 }
 
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-family: KoHo, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #46466f;
+  padding-top: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin: auto;
+  width: 40%;
+  height: 600px;
+}
+
+.modal_input {
+    background: #363656;
+    color: #fff;
+    width: 80%;
+    font-family: Tomorrow, sans-serif;
+    font-size: 20px;
+    border-radius: 9px;
+    border: 1px solid #363656;
+    text-align: left;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.modal_input:hover {
+background: #4b4b77;
+}
+
+
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
     
     </style>
     <meta name="viewport" content="width=device-width">
 </head>
 <body id="body" style="background-color: #4d4b81; overflow: hidden; width: 100; height: 100%;">
 
-    <div class="center" id="center">
-        <h1>Your Portfolio</h1>
-        <a href="/settings"><img src="/icons/settings.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 6px; position: relative;"></img></a>
-        <a href="/add_new"><img src="/icons/add_new.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 12px; position: relative;"></img></a>
+<div id="modal_addnew" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" id="close_modal_addnew">&times;</span>
+    <p>Add New Coin</p>
+        <div style="height: 320px; padding: 10px; overflow-y: scroll;">
+            {% for entry in data['coins'] %}
+                <label class="container">{{ data['coins'][entry] }} ({{ entry }})
+                <input autocomplete="off" id="add_coin_{{ entry }}" type="checkbox">
+                <span class="checkmark"></span>
+                </label>
+            {% endfor %}
+            <br>
+        </div>
+        <div id="addNew_amount_input">
+        <p>Amount:</p>
+        <input type="number" id="addNew_amount" autocomplete="off" class="modal_input"></input>
+        </div>
+        <div style="padding-top: 25px;">
+            <a onclick="AddNew()"><p class="menubtn" style="background-color: #363656; color: #fff; padding: 10px 6px;">Add</p></a>
+        </div>
+  </div>
+
+</div>
+
+
+    <div class="center" style="overflow: hidden; overflow-y: auto; height: 100vh;" id="center">
+        <h1 id="title">Your Portfolio</h1>
+        <a onclick="toggleDeleteMode()"><img id="delete_icon" src="/icons/delete.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 6px; position: relative;"></img></a>
+        <a onclick="AddNewModal()"><img src="/icons/add_new.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 12px; position: relative;"></img></a>
         <a onclick="toggleMoveMode()"><img id="move_icon" src="/icons/move.png" class="menubtn" style="width: 38px; height: auto; float: right; top: 38px; right: 18px; position: relative;"></img></a>
-        <p id="bar_name" style="padding-left: 12px; font-family: Tomorrow; font-size: 27px; margin: 0; padding-bottom: 8px; padding-top: 38px;" >Total: £526.30 <span style="font-size: 16px; color: #2ad728; ">+6.83%</span></p>
-        <div>
-            <div class="box_wrapper" id="box1" style="top: 192px">
-                <a onclick="openCoinScreen('etc')">
-                <div class="portfolio_box">
-                    <img style="position: absolute; width: auto; height: 32px;" src="/icons/btc.png"/><h3 style="position: relative; left: 40px;">Bitcoin (BTC)</h3>
-                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">0.5100 BTC</span>&ensp;➤&ensp;<span style="color: #ea656d;">£14,004.25 -£25.62</span></h4>
-                </div>
-                </a>
-            </div>
+        <p id="bar_name" style="padding-left: 12px; font-family: Tomorrow; font-size: 27px; margin: 0; padding-bottom: 8px; padding-top: 38px;" >Total:&ensp;{{ data['currency_symbol'] }}{{ data['total'] }} <span style="font-size: 16px; color: {{ data['total_change_colour'] }}; ">{{ data['total_change_ve'] }}{{ data['currency_symbol'] }}{{ data['total_change'] }}</span></p>
         
-            <div class="box_wrapper" id="box2" style="top: 268px">
-                <a onclick="openCoinScreen('etc')">
+        <div id="boxdiv">
+            {% for entry in data['portfolio'] %}
+            <div class="box_wrapper" id="box{{ entry['coord_y'] }}" style="top: {{ entry['coord_y'] }}px">
+                <a onclick="openCoinScreen('{{ entry['coin_lowercase'] }}')">
                 <div class="portfolio_box">
-                    <img style="position: absolute;  width: auto; height: 32px;" src="/icons/xmr.png"/><h3 style="position: relative; left: 40px;">Monero (XMR)</h3>
-                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">15.630 XMR</span>&ensp;➤&ensp;<span style="color: #2ad728;">£1,521.77 +£2.56</span></h4>
+                    <img style="position: absolute; width: auto; height: 32px;" src="/icons/{{ entry['coin_lowercase'] }}.png"/><h3 style="position: relative; left: 40px;">{{ entry['coin_full_name'] }}</h3>
+                    <h4 style="position: relative; left: -16px;">&emsp;{{ entry['command_word'] }}: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">{{ entry['amount'] }} {{ entry['coin'] }}</span><span style="position: absolute; left: 196px;">➤&emsp;<span style="color: {{ entry['change_colour'] }}">{{ data['currency_symbol'] }}{{ entry['price'] }}</span><span style="font-size: 12px; color: {{ entry['change_colour'] }}; ">&ensp;{{ entry['change_ve'] }}{{ entry['change'] }}</span></h4>
                 </div>
                 </a>
             </div>
-            
-            <div class="box_wrapper" id="box3" style="top: 344px">
-                <a onclick="openCoinScreen('etc')">
-                <div class="portfolio_box">
-                    <img style="position: absolute;  width: auto; height: 32px;" src="/icons/doge.png"/><h3 style="position: relative; left: 40px;">Dogecoin (DOGE)</h3>
-                    <h4 style="position: relative; left: -16px;">&emsp;Owned: <span style="color: #6a8d86; display: inline-block;  font-family: monospace;">96.23 DOGE</span>&ensp;➤&ensp;<span style="color: #2ad728;">£14.75 +£1.52</span></h4>
-                </div>
-                </a>
+            {% endfor %}
+            <div id="bottom_div" style="position: absolute; top: 720px; width: 100%; padding-bottom: 20px;">
+                <p style="font-size: 16px; color: #a0a9a7; width: 100%; text-align: center; margin-right: 50%;"><a style="text-decoration: none; color: #b1b9b7" href="https://github.com/jakedolan443/peluno">Github</a> | <a style="text-decoration: none; color: #b1b9b7" href="https://ko-fi.com/jakedolan">Donate</a></p>
             </div>
         </div>
-        
-
-
-        
-        
-        
-        
-        
     </div>
+
     
 <script>
 
 
+String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i += 1) {
+                var reg = new RegExp('\\{' + i + '\\}', 'gm');
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        };  
 
+const boxes = []
 
-dragElement(document.getElementById("box1"));
-dragElement(document.getElementById("box2"));
-dragElement(document.getElementById("box3"));
-const boxes = ["box1", "box2", "box3"]
-var n = parseInt(document.getElementById("box1").style.top, 10);
+{% for entry in data['portfolio'] %}
+boxes[boxes.length] = dragElement(document.getElementById("box{{ entry['coord_y'] }}"));
+dragElement(document.getElementById("box{{ entry['coord_y'] }}"));
+{% endfor %}
+
+var n = 192;
 var dragMode = false
+var deleteMode = false
 
 
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
+
+function AddNewModal() {
+    document.getElementById("modal_addnew").style.display = "block";
+}
 
 function toggleMoveMode() {
     if (dragMode) {
@@ -164,6 +308,25 @@ function toggleMoveMode() {
       document.getElementById("move_icon").src = "/icons/cancel.png"
         document.querySelectorAll('*').forEach(function(node) {
             node.style.cursor = 'grab';
+        });
+    }
+
+}
+
+
+function toggleDeleteMode() {
+    if (deleteMode) {
+      deleteMode = false
+      document.getElementById("delete_icon").src = "/icons/delete.png"
+        document.querySelectorAll('*').forEach(function(node) {
+            node.style.cursor = 'default';
+        });
+
+    } else {
+      deleteMode = true
+      document.getElementById("delete_icon").src = "/icons/cancel.png"
+        document.querySelectorAll('*').forEach(function(node) {
+            node.style.cursor = 'cell';
         });
     }
 
@@ -194,14 +357,6 @@ function dragElement(elmnt) {
     }
   }
 
-String.format = function() {
-            var s = arguments[0];
-            for (var i = 0; i < arguments.length - 1; i += 1) {
-                var reg = new RegExp('\\{' + i + '\\}', 'gm');
-                s = s.replace(reg, arguments[i + 1]);
-            }
-            return s;
-        };  
 
 function round76(y)
 {
@@ -229,15 +384,22 @@ function round76(y)
     var new_coordY = (round76(elmnt.offsetTop - pos2)) 
     var elmnt2 = "n/a"
     elmnt.style.top = new_coordY  + "px";
-    for (let i = 1; i < boxes.length+1; i++) {
-        if (new_coordY == parseInt(document.getElementById(String.format("box{0}", i)).style.top, 10)) {
-            if (!(document.getElementById(String.format("box{0}", i)) == elmnt)) {
-                elmnt2 = document.getElementById(String.format("box{0}", i));
-            }
+    var url = "/change-order";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    {% for entry in data['portfolio'] %}
+    if (new_coordY == parseInt(document.getElementById("box{{ entry['coord_y'] }}").style.top, 10)) {
+        if (!(document.getElementById("box{{ entry['coord_y'] }}") == elmnt)) {
+            elmnt2 = document.getElementById("box{{ entry['coord_y'] }}")
+        sleep(1).then(() => {
+            xhr.send(JSON.stringify({"one":pos5, "two":elmnt.style.top}));
+        });
+        }
     }
+    {% endfor %}
     
     
-    } 
     if (!(elmnt2 == "n/a")) {
         elmnt2.style.transition = "all 0.2s ease-out"
         elmnt2.style.top = pos5
@@ -257,6 +419,15 @@ function round76(y)
 
 function openCoinScreen(coin) {
     if (dragMode) {
+        return;
+    }
+    if (deleteMode) {
+        var url = "/delete";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({"coin":coin}));
+        window.location.href = "/";
         return;
     }
     clearScreen();
@@ -284,6 +455,76 @@ document.getElementById("center").classList.add("slidein-from-right");
 } else {
     document.getElementById("center").classList.add("slidein-fix");
 }
+
+document.getElementById("close_modal_addnew").onclick = function() {
+  document.getElementById("modal_addnew").style.display = "none";
+}
+
+
+
+
+
+
+
+function AddNew() {
+    var url = "/";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    coins = [];
+    
+    {% for entry in data['coins'] %}
+    if (document.getElementById(String.format("add_coin_{0}", "{{ entry }}")).checked) {
+        coins[coins.length] = "{{ entry }}";
+    }
+    {% endfor %}
+    
+    if (coins.length == 0) {
+        alert("Must select one coin.");
+        return;
+    }
+    if ("{{ data['mode'] }}" == "portfolio") {
+        amount = document.getElementById("addNew_amount").value;
+    } else {
+        amount = 1.00;
+    }
+    if (amount == '') {
+        alert("Amount is not a valid number.");
+        return;
+    }
+    if (amount < 0) {
+        alert("Amount must be above zero.");
+        return;
+    }
+    xhr.send(JSON.stringify({"coins":coins, "amount":amount}));
+    document.getElementById("modal_addnew").style.display = "none";
+    window.location.href = "/";
+    
+}
+
+
+
+if ("{{ data['mode'] }}" == "coin") {
+    document.getElementById("addNew_amount_input").style.display = "none";
+    document.getElementById("bar_name").style.display = "none";
+    document.getElementById("title").textContent = "Your Coins";
+    document.getElementById("title").style.position = "relative"; document.getElementById("title").style.top = "25px";
+}
+
+
+{% for entry in data['portfolio'] %}
+document.getElementById("bottom_div").style.top = "calc({{ entry['coord_y'] }}px + 120px)";
+{% endfor %}
+
+
+
+
+
+
+
+
+
 
 
 
