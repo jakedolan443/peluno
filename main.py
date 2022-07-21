@@ -133,7 +133,7 @@ def Setup_POST():
 @app.route('/')
 def Index_GET():
     if not readHardStoreVariable("setup_completed"):
-        redirect("/setup")
+        return redirect("/setup")
     portfolio = readPortfolio()
     prices = []
     changes = []
