@@ -154,6 +154,7 @@ def Index_GET():
             portfolio[i]["price"] = "{:20,.2f}".format(new_price)
             prices.append(new_price)
         except ValueError as e:
+            new_price = 0
             portfolio[i]["price"] = "{}".format(coin_info['price'])
         try:
             portfolio[i]["change"] = "{}%".format(abs(float(coin_info['change'].split("%")[0])))
