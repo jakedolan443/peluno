@@ -216,7 +216,7 @@ svg {
     
             <h1>Hello!</h1>
             <div>
-                <h4>Thank you for downloading CryptoHTTP! To get started, you will be asked a few questions on how you would like to use this application.</h4>
+                <h4>Thank you for downloading Peluno! To get started, you will be asked a few questions on how you would like to use this application.</h4>
             </div>
             <div style="padding-top: 25px;">
                 <a onclick="Page(2)"><p class="menubtn" style="padding: 10px 6px;">Start</p></a>
@@ -226,14 +226,19 @@ svg {
         
         <div class="appear" id="page2" style="display: none;">
     
-            <h1>Server Authentication</h1>
+            <h1>API</h1>
             <div>
-                <h4>In order to configure the server in the future, you will be asked to provide an authentication key. This key should NOT be shared. You will not see this key again, so it would be wise to note it down now.</h4>
-                <br>
-                <h4>Key: <span style="font-size: 18px; font-family: monospace;">5923650236523i692351250129692362351267</span></h4>
+                <h4>In order to continue, you must agree to the Cryptowatch (API) <a style="color: #fff; text-decoration: underline;" target="_blank" href="https://cryptowat.ch/about/terms">Terms & Conditions</a></h4>
                 <br>
                 <input type="checkbox" autocomplete="off" id="noted_check" name="noted" onclick="return: false;">
-                <h4 style="display: inline; font-size: 15px; font-family: Tomorrow; font-weight: 200;"><label for="noted"> I have copied this key to a secure location.</label></h4>
+                <h4 style="display: inline; font-size: 15px; font-family: Tomorrow; font-weight: 400;"><label for="noted"> I have read and agree to the terms & conditions.</label></h4>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div>
+                <h4>Optional: You may wish to provide a cryptowatch API key. The program will operate the same without an API key, but risks being throttled by the API - this may impact your long-term market data. You can get a free API key <a style="text-decoration: none; color: #1ecbe1;" href="https://cryptowat.ch/">here</a>.</h4>
+                <input id="crypto_api_key" autocomplete="off" placeholder="API Key ..." class="api_input"></input>
             </div>
             <div style="padding-top: 25px;">
                 <a id="noted_btn_a"><p id="noted_btn" class="menubtn" style="color: #7c8180; padding: 10px 6px;">Next</p></a>
@@ -243,55 +248,31 @@ svg {
         
         <div class="appear" id="page3" style="display: none;">
     
-            <h1>API Preference</h1>
+            <h1>App Mode</h1>
             <div>
-                <h4>An external API is used to fetch live market data on the markets of your choosing. You may choose which API to use.</h4>
+                <h4>Peluno has two modes available - Portfolio and Coin mode.</h4>
                 <br>
-                <h4 style="padding-bottom: 15px;">You are strongly recommended to provide an API key, as this will increase your rate limit.</h4>
+                <h4 style="padding-top: 15px;">Portfolio mode will show you the value of what you own in your chosen currency.</h4>
+                <h4>Coin mode will instead show you the standard value of 1.00 coin in your chosen currency.</h4>
                 <br>
-                <div>
-                    <div>
-                        <button class="w3-bar-item w3-button tablink api_active api_btn" onclick="openCity(event,'api_option_1')" style="width: 200px;">alphavantage.co</button>
-                        <button class="w3-bar-item w3-button tablink api_btn" onclick="openCity(event,'api_option_2')">polygon.io</button>
-                        <button class="w3-bar-item w3-button tablink api_btn"  onclick="openCity(event,'api_option_3')">cryptowat.ch</button>
+                <div style="width: 100%; background: #46466f; height: 75px; border-radius: 9px;">
+                    <div style="height: 75px; padding: 10px;">
+                        <label class="container">Portfolio Mode
+                        <input id="mode_portfolio" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Coin Mode
+                        <input id="mode_coin" autocomplete="off" type="radio" name="radio">
+                        <span class="checkmark"></span>
+                        </label>
                     </div>
                 </div>
                 
                 
-                <div style="width: 100%; background: #46466f; height: 400px; border-radius: 9px; padding: 11px; ">
-                
-                    <div class="api_tab" id="api_option_1">
-                        <h5>An API key is optional to use Alpha Vantage's free API, but providing one will increase your rate limit.</h5>
-                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://www.alphavantage.co/support/#api-key">here</a></u>.</h5>
-                        <br>
-                        <h5>API Key:
-                        <input class="api_input"></input>
-                        </h5>
-                    </div>
-
-                    <div class="api_tab" id="api_option_2" style="display:none">
-                        <h5>An API key is <u>required</u> to use Polygon's API.</h5>
-                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://polygon.io/dashboard/signup">here</a></u>.</h5>
-                        <br>
-                        <h5>API Key:
-                        <input class="api_input"></input>
-                        </h5>
-                    </div>
-
-                    <div class="api_tab" id="api_option_3" style="display:none">
-                        <h5>An API key is optional to use CryptoWatch's free API, but providing one will increase your rate limit.</h5>
-                        <h5>You can setup an API key <u><a target="_blank" style="text-decoration: none; color: #ddd;" href="https://www.alphavantage.co/support/#api-key">here</a></u>.</h5>
-                        <br>
-                        <h5>API Key:
-                        <input class="api_input"></input>
-                        </h5>
-                    </div>
-                
-                </div>
 
             </div>
             <div style="padding-top: 25px;">
-                <a onclick="Page(4)"><p class="menubtn" style="padding: 10px 6px;">Next</p></a>
+                <a id="mode_btn_a"><p id="mode_btn" class="menubtn" style="color: #7c8180; padding: 10px 6px;">Next</p></a>
             </div>
 
         </div>
@@ -326,6 +307,10 @@ svg {
                         </label>
                     </div>
                 </div>
+                <br>
+                <h4>To use a currency other than USD, you <u>must</u> provide an API key for exchangerate-api.com. You can get a free API key <a style="text-decoration: none; color: #1ecbe1;" href="https://app.exchangerate-api.com/">here</a>.
+                If you are unable to provide this key, you can use USD with no further issues.</h4>
+                <input id="currency_api_key" autocomplete="off" oninput="APIInput()" placeholder="API Key ..." class="api_input"></input>
 
             </div>
             <div style="padding-top: 25px;">
@@ -343,8 +328,8 @@ svg {
                 <div style="width: 100%; background: #46466f; height: 320px; border-radius: 9px;">
                     <div style="height: 320px; padding: 10px; overflow-y: scroll;">
                         {% for entry in data['coins'] %}
-                            <label class="container">{{ entry['name'] }}
-                            <input autocomplete="off" id="coin_{{ entry['name'] }}" type="checkbox">
+                            <label class="container">{{ data['coins'][entry] }} ({{ entry }})
+                            <input autocomplete="off" id="coin_{{ entry }}" type="checkbox">
                             <span class="checkmark"></span>
                             </label>
                         {% endfor %}
@@ -372,24 +357,12 @@ svg {
 <script>
 
 currency = ["usd", "eur", "gbp", "cad", "aud"];
-coin_list = [{"name": "Bitcoin", "symbol": "BTC"}, {"name": "Ethereum", "symbol": "ETC"}, {"name": "Tether", "symbol": "USDT"}, {"name": "USD Coin", "symbol": "USDC"}, {"name": "BNB", "symbol": "BNB"}, {"name": "Binance USD", "symbol": "BUSD"}, {"name": "Cardano", "symbol": "ADA"}, {"name": "XRP", "symbol": "XRP"}, {"name": "Solana", "symbol": "SOL"}, {"name": "Dogecoin", "symbol": "DOGE"}, {"name": "Polkadot", "symbol": "DOT"}, {"name": "Dai", "symbol": "DAI"}, {"name": "TRON", "symbol": "TRX"}, {"name": "SHIBA INU", "symbol": "SHIB"}, {"name": "Wrapped Bitcoin", "symbol": "WBTC"}, {"name": "UNUS SED LEO", "symbol": "LEO"}, {"name": "Avalanche", "symbol": "AVAX"}, {"name": "Litecoin", "symbol": "LTC"}, {"name": "FTX Token", "symbol": "FTT"}, {"name": "Polygon", "symbol": "MATIC"}, {"name": "Chainlink", "symbol": "LINK"}, {"name": "Uniswap", "symbol": "UNI"}, {"name": "Crypto.com Coin", "symbol": "CRO"}, {"name": "Stellar Lumens", "symbol": "XLM"}, {"name": "NEAR Protocol", "symbol": "NEAR"}];
-api = ["alphavantage", "polygon.io", "cryptowatch"];
-chosenAPI = "api_option_1";
+modes = ["portfolio", "coin"];
 
-function openCity(evt, cityName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("api_tab");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" api_active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " api_active";
-  chosenAPI = cityName;
-}
+
+
+
+
 
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -423,9 +396,10 @@ function Page(n) {
 
 }
 
-function getChosenAPI() {
-    return chosenAPI;
+function getChosenMode() {
+    return chosenMode;
 }
+
 
 function getChosenCurrency() {
     return chosenCurrency;
@@ -433,22 +407,26 @@ function getChosenCurrency() {
 
 function getChosenMarkets() {
     coins = [];
-    for (let i = 0; i < coin_list.length; i++) {
-        if (document.getElementById(String.format("coin_{0}", coin_list[i].name)).checked) {
-            coins[coins.length] = coin_list[i].name;
-        }
+    
+    {% for entry in data['coins'] %}
+    if (document.getElementById(String.format("coin_{0}", "{{ entry }}")).checked) {
+        coins[coins.length] = "{{ entry }}";
     }
+    {% endfor %}
+    
     return coins;
 }
 
 function Finish() {
     Page(6);
     const config = {};
-    config.apiPref = getChosenAPI();
-    config.currencyPref = getChosenCurrency();
+    config.mode = getChosenMode();
+    config.currency = getChosenCurrency();
     config.monitorMarkets = getChosenMarkets();
+    config.crypto_api_key = document.getElementById("crypto_api_key").value
+    config.currency_api_key = document.getElementById("currency_api_key").value
     ConfigureServer(config);
-    sleep(2600).then(() => {
+    sleep(10000).then(() => {
         window.location.replace("/");
     });
 }
@@ -473,14 +451,33 @@ document.getElementById("noted_check").addEventListener('change', (event) => {
   }
 })
 
-for (let i = 1; i < currency.length; i++) {
-    document.getElementById(String.format('currency_radio_{0}', currency[i])).addEventListener('change', (event) => {
-    if (event.currentTarget.checked) {
+function APIInput() {
+    if (document.getElementById("currency_api_key").value) {
         document.getElementById("currency_btn_a").onclick = function () {
             Page(5);
         }
-        chosenCurrency = currency[i];
         document.getElementById("currency_btn").style.color = "#fff";
+    }
+    else {
+    document.getElementById("currency_btn_a").onclick = "";
+    document.getElementById("currency_btn").style.color = "#7c8180";
+    }
+}
+
+for (let i = 0; i < currency.length; i++) {
+    document.getElementById(String.format('currency_radio_{0}', currency[i])).addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        chosenCurrency = currency[i];
+        if ((document.getElementById("currency_api_key").value.length > 5) || (currency[i] == "usd")) {
+            document.getElementById("currency_btn_a").onclick = function () {
+                Page(5);
+            }
+            document.getElementById("currency_btn").style.color = "#fff";
+        }
+        else {
+        document.getElementById("currency_btn_a").onclick = "";
+        document.getElementById("currency_btn").style.color = "#7c8180";
+        }
     } else {
         document.getElementById("currency_btn_a").onclick = "";
         document.getElementById("currency_btn").style.color = "#7c8180";
@@ -488,6 +485,20 @@ for (let i = 1; i < currency.length; i++) {
     })
 }
 
+for (let i = 0; i < modes.length; i++) {
+    document.getElementById(String.format('mode_{0}', modes[i])).addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        document.getElementById("mode_btn_a").onclick = function () {
+            Page(4);
+        }
+        chosenMode = modes[i];
+        document.getElementById("mode_btn").style.color = "#fff";
+    } else {
+        document.getElementById("mode_btn_a").onclick = "";
+        document.getElementById("mode_btn").style.color = "#7c8180";
+    }
+    })
+}
 
 
 
