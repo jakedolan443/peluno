@@ -3,7 +3,7 @@ import threading
 import time
 import json
 
-
+real_path = ""
 coins = {"ZRX":"0x",
 "1INCH":"1inch",
 "AAVE":"Aave",
@@ -95,7 +95,7 @@ coins = {"ZRX":"0x",
 def get_data_for_coin(coin):
     try:
         coin = coin.lower()
-        with open("data/{}_history.json".format(coin)) as f:
+        with open("{}/data/{}_history.json".format(real_path, coin)) as f:
             existing_data = json.loads(f.read())
         data = {"coin":coin, "coin_full_name":"{} ({})".format(coins[coin.upper()], coin.upper()), "historic":[[],[]]}
         for entry in existing_data:
@@ -113,14 +113,14 @@ def get_data_for_coin(coin):
 def save_new_data(coin, data):
     coin = coin.lower()
     try:
-        with open("data/{}_history.json".format(coin)) as f:
+        with open("{}/data/{}_history.json".format(real_path, coin)) as f:
             existing_data = json.loads(f.read())
         existing_data[time.time()] = data
-        with open("data/{}_history.json".format(coin), "w") as f:
+        with open("{}/data/{}_history.json".format(real_path, coin), "w") as f:
             f.write(json.dumps(existing_data))
     except FileNotFoundError:
         data = {time.time():data}
-        with open("data/{}_history.json".format(coin), "w") as f:
+        with open("{}/data/{}_history.json".format(real_path, coin), "w") as f:
             f.write(json.dumps(data))
 
 def get_exchange_rate(currency): #from USD

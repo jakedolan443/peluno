@@ -5,9 +5,14 @@ import server
 from threading import Thread
 import time
 import requests
+import os.path
 
 
 app = Flask(__name__, static_url_path='')
+real_path = os.path.dirname(os.path.realpath(__file__))
+server.real_path = real_path
+
+
 
 def update_coin_loop():
     while True:
@@ -51,12 +56,12 @@ def add_new_coin(data):
     portfolio = readPortfolio()
     for coin in data['coins']:
         portfolio.append({"coin":coin, "amount":"{:.5f}".format(float(data['amount']))})
-    with open("data/portfolio.json", "w") as f:
+    with open("{}/data/portfolio.json".format(real_path), "w") as f:
         f.write(json.dumps(portfolio))
         
 
 def readPortfolio():
-    with open("data/portfolio.json", "r") as f:
+    with open("{}/data/portfolio.json".format(real_path), "r") as f:
         data = json.loads(f.read())
     try:
         return data
@@ -64,7 +69,7 @@ def readPortfolio():
         return
 
 def readHardStoreVariable(var):
-    with open("hard_store_vars.json", "r") as f:
+    with open("{}/hard_store_vars.json".format(real_path), "r") as f:
         data = json.loads(f.read())
     try:
         return data[var]
@@ -72,13 +77,13 @@ def readHardStoreVariable(var):
         return
     
 def editHardStoreVariable(var, new_data):
-    with open("hard_store_vars.json", "r") as f:
+    with open("{}/hard_store_vars.json".format(real_path), "r") as f:
         data = json.loads(f.read())
     try:
         data[var] = new_data
     except KeyError:
         return
-    with open("hard_store_vars.json", "w") as f:
+    with open("{}/hard_store_vars.json".format(real_path), "w") as f:
         data = f.write(json.dumps(data))
 
 
@@ -127,7 +132,7 @@ def Setup_POST():
     markets = []
     for market in data['monitorMarkets']:
         markets.append({"coin":market, "amount":"1"})
-    with open("data/portfolio.json", "w") as f:
+    with open("{}/data/portfolio.json".format(real_path), "w") as f:
         f.write(json.dumps(markets))
     return "OK", 200
 
@@ -193,7 +198,7 @@ def Change_Order_POST():
     tmp = portfolio[two]
     portfolio[two] = portfolio[one]
     portfolio[one] = tmp
-    with open("data/portfolio.json", "w") as f:
+    with open("{}/data/portfolio.json".format(real_path), "w") as f:
         f.write(json.dumps(portfolio))
     return "OK", 200
 
@@ -205,7 +210,7 @@ def Delete_POST():
     for item in portfolio:
         if not (item['coin'].lower() == data['coin'].lower()):
             new_portfolio.append(item)
-    with open("data/portfolio.json", "w") as f:
+    with open("{}/data/portfolio.json".format(real_path), "w") as f:
         f.write(json.dumps(new_portfolio))
     return "OK", 200
 
