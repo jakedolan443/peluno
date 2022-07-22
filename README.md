@@ -31,6 +31,8 @@ chmod +x peluno.py
 Peluno binds onto 0.0.0.0 port 8080.
 To access the setup interface, head to http://0.0.0.0:8080
 
+If you are using Systemd, you may use [this service file](https://gist.githubusercontent.com/jakedolan443/a4aa3cd62d7d6b5866671d13be8238ac/raw/0672392abf5eefdb35b812711df3f06deff8d2c4/peluno_systemd.service) to run peluno on boot.
+
 # Contribute
 
 This project does not yet have docker support - if anyone is willing, please make a pull request.
