@@ -1,3 +1,4 @@
 flask
 cryptowatch-sdk
 gevent
+protobuf==3.20.*
